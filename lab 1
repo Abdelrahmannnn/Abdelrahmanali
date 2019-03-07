@@ -1,0 +1,108 @@
+public class implement {
+	
+     public  void reverse (int[] arr) {
+    	 int i;
+    	 int y;
+    	 for(i=0;i<arr.length/2;i++) {
+    		 y=arr[i];
+    		 arr[i]=arr[arr.length-1-i];
+    		 arr[arr.length-1-i]=y;
+    		 
+    	 }
+    	 
+     }
+     public  int[] sumEvenOdd(int[] arr) {
+    	 int even=0;
+    	 int odd=0;
+    	 for(int i=0;i<arr.length;i++) {
+    		 if(arr[i]%2==0) {
+    			 even+=arr[i];
+    		 }else {
+    				 odd+=arr[i];
+    			 }
+    			 
+    		 }
+    	 int []sumevenodd=new int [2];
+    	 sumevenodd[0]=even;
+    	 sumevenodd[1]=odd;
+    	 return sumevenodd;
+    		 
+    	 }
+     
+     public  double average(int[]arr) {
+    	 long w=0;
+    	 for(int i=0;i<arr.length;i++) {
+    		 w+=arr[i];
+    	 }
+    	 w/=arr.length;
+    	 return w*1.0;
+    	 
+     }
+     public void moveValue(int[] arr, int val) {
+    	 for(int i=0;i<arr.length;) {
+    		 if(arr[i]==val) {
+    				 for(int j=i;j<arr.length-1;j++) {
+    						 int e=arr[j];
+    						 arr[j]=arr[j+1];
+    						 arr[j+1]=e;   				 
+    			 } 				 
+    		 }
+    		 if(arr[i]==val) {
+    			 i=i; 			 
+    		 }else {
+    			 i++;
+    		 }
+    		     		 
+    	 }
+     
+     public int[][] transpose(int [][]arr) {
+   	 int a=arr.length;
+   	 int b=arr[0].length;
+   	 
+   	 int w[][]=new int [b][a];
+   	 for(int i=0;i<b;i++) {
+   		 for(int j=0;j<a;j++) {
+   			 w[j][i]=arr[i][j];
+   		 }
+   	 }
+   	 return w;
+    }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     import java.math.BigInteger;
+ public class fibonacci implements Fibonaccinumber {
+	public BigInteger  fibonacci(int w) {
+		 BigInteger first= new BigInteger("0") ;
+		 BigInteger second =new BigInteger("1") ;
+		 BigInteger next=new BigInteger("0");
+		 if(w==1) {
+			 return next;
+		 }else if (w==2) {
+			 return next+1;
+		 }else {
+			
+		for(int i=2;i<w;i++) {
+			next = first+second;
+			first=second;
+			second =next;
+						
+		}
+		
+		return next;
+		 }
+		
+	}
+  
