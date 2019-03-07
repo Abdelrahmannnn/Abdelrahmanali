@@ -83,19 +83,19 @@ public class implement {
      
      
      import java.math.BigInteger;
- public class fibonacci implements Fibonaccinumber {
+ public class fibonacci {
 	public BigInteger  fibonacci(int w) {
 		 BigInteger first= new BigInteger("0") ;
 		 BigInteger second =new BigInteger("1") ;
 		 BigInteger next=new BigInteger("0");
 		 if(w==1) {
-			 return next;
+			 return next.ZERO;
 		 }else if (w==2) {
-			 return next+1;
+			 return next.ONE;
 		 }else {
 			
 		for(int i=2;i<w;i++) {
-			next = first+second;
+			next = first.add(second);
 			first=second;
 			second =next;
 						
@@ -103,6 +103,8 @@ public class implement {
 		
 		return next;
 		 }
+		
+	}
 		
 	}
   
