@@ -35,7 +35,8 @@ public class implement {
     		 w+=arr[i];
     	 }
     	 w/=arr.length;
-    	 return w*1.0;
+	 double y =Double.longBitsToDouble(w);
+      	 return y;
     	 
      }
      public void moveValue(int[] arr, int val) {
