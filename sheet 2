@@ -1,0 +1,303 @@
+public class LinkedListNode {
+	int value ;
+	LinkedListNode next = null ;
+	public LinkedListNode(int r) {
+		this.value=r;
+		
+	}
+	
+	public int getValue() {
+		return value ;		
+	}
+	
+	public LinkedListNode getNext() {
+		return next ;
+	}
+	
+
+
+}
+
+
+
+
+
+
+public static double[] summary(LinkedListNode head  ) {
+				int i=0;
+				LinkedListNode w = head ;
+				double sum=0, average=0,median, max , min ;
+				max=head.getValue();
+				min=head.getValue();
+				while(w!=null) {
+					sum+=w.getValue();
+					if(w.getValue()>max) {
+						max=w.getValue();
+					}
+					if(w.getValue()<min) {
+						min=w.getValue();
+					}
+					i++;
+					w=w.getNext();
+				}
+				average=sum/i;
+				w=head;
+				double median1=0,median2=0;
+				int j=0;
+					while(w!=null) {
+						if(j==(i/2-1)) {
+							median1=w.getValue();
+						}if(j==i/2) {
+							median2=w.getValue();
+						}
+						j++;
+						w=w.getNext();
+					}
+					if(i%2!=0) {
+						median=median2;		
+					}else {
+						median=(median1+median2)/2;
+					}
+					double []arr=new double [5];
+					arr[0]=sum;arr[1]=average;arr[2]=median;arr[3]=max;arr[4]=min;
+					return arr;
+									
+				
+			}
+      
+      
+      
+      
+      public static LinkedListNode reverse (LinkedListNode head) {
+				LinkedListNode next= head;
+				LinkedListNode prev= null  ;
+				LinkedListNode current = head;
+				
+				
+				while(current!=null) {
+					next=current.getNext() ;
+					current.next=prev;
+					prev=current;
+					current=next;
+				}
+				head=prev;
+				
+				
+				return head;
+				
+			}
+      
+      
+      
+      
+      
+      
+      public static LinkedListNode insertionsort(LinkedListNode head) {
+				  if (head == null) {
+				        return null;
+				  }
+
+				    // Make the first node the start of the sorted list.
+				  LinkedListNode sortedList = head;
+				     head= head.getNext();
+				    sortedList.next = null;
+
+				    while(head != null) {
+				     
+				        LinkedListNode current = head;
+				        head = head.getNext();
+				        if (current.value < sortedList.value) {
+				            // Current is new sorted head.
+				            current.next = sortedList;
+				            sortedList = current;
+				        } else {
+				            // Search list for correct position of current.
+				        	LinkedListNode temp = sortedList;
+				            while(temp.getNext() != null && current.value > temp.getNext().getValue())
+				                temp = temp.getNext();
+
+				            //  put current in his place after search for his position
+				            current.next = temp.next;
+				            temp.next = current;
+				        }
+				    }
+
+				    return sortedList;
+				}
+        
+        
+        
+        
+        
+        
+        
+        
+        public static LinkedListNode mergeSort(LinkedListNode head) {
+				  if (head == null||head.getNext()==null) {
+				        return head;
+				  }
+				  LinkedListNode middle=middleNode(head);
+				  LinkedListNode secondhalf=middle.getNext();
+				  middle.next=null;
+				  return merge( mergeSort(head),mergeSort(secondhalf));
+				  
+			}
+			public static LinkedListNode merge (LinkedListNode a , LinkedListNode b) {
+				LinkedListNode temp = new LinkedListNode(a.getValue());
+				LinkedListNode finalist=temp;
+				while(a!=null&&b!=null) {
+					if(a.getValue()<b.getValue()) {
+						temp.next=a;
+						a=a.getNext();
+					}else {
+						temp.next=b;
+						b=b.getNext();
+					}
+					temp=temp.getNext();
+				}
+				temp.next=(a==null)?b:a;
+				return finalist.next;
+			}
+			public static LinkedListNode middleNode(LinkedListNode head) {
+				if(head==null) {
+					return head;
+				}
+				LinkedListNode a=head;
+				LinkedListNode b=head.getNext();
+				while(b!=null&&b.getNext()!=null) {
+					a=a.getNext();
+					b=b.getNext().getNext();
+				}
+				return a;
+			}
+      
+      
+      
+      
+      
+      
+      
+      
+      public static LinkedListNode removeCentralNode(LinkedListNode head) {
+				LinkedListNode current = head;
+				LinkedListNode temp = head;		
+				int j=0;
+				int i=0;
+				while(current!=null) {
+					j++;
+					current=current.getNext();
+				}
+				current=head;
+				while(current!=null) {
+					if(j%2!=0) {
+						if(i==(j/2)-1) {
+							temp=current;
+						}
+						if(i==(j/2)+1) {
+							temp.next=current;
+						}
+					}else {
+						if(i==(j/2)-2) {
+							temp=current;		
+						}
+						if(i==(j/2)) {
+							temp.next=current;
+						}
+					}
+					i++;
+					current=current.getNext();											
+				}
+				return head;
+			}
+      
+      
+      
+      
+      
+        public static LinkedListNode evenIndexedElements(LinkedListNode head) {
+				LinkedListNode current = head;
+				LinkedListNode temp = new LinkedListNode (head.getValue());
+				LinkedListNode pointer=temp;
+				LinkedListNode temp2;
+				
+				int i=0;
+				while(current!=null) {
+					i++;
+					current=current.getNext();
+					temp2=current;
+					if(i%2==0){
+						
+						temp.next=temp2;
+						temp=temp.getNext();
+					}
+					
+				}
+				temp.next=null;
+				return pointer;
+			}
+      
+      
+      
+      
+      
+      public static boolean palindrome(LinkedListNode head) {
+				LinkedListNode current = head;
+				int i=0;
+				while(current !=null) {
+					current=current.getNext();
+					i++;
+				}
+				 
+		            int temp2;
+		            if(i%2==0) {
+		            	temp2=i/2;
+		            }else {
+		            	temp2=(i/2)+1;
+		            }
+		            i=0;
+		            current=head;
+
+		            // Traverse to next to mid element
+		            while (i < temp2) {
+		                current = current.getNext();
+		                i++;
+		            }
+		            // Reverse right side of the List and return head of the reversed list
+		            LinkedListNode head1 = reverse(current);
+
+		            boolean Palindrome = true;
+		            temp2 = i / 2;
+		            current = head;
+		            i=0;
+
+		            // Check reversed list(second half) matches with first half  or not
+		            while (i <temp2) {
+
+		                if (current.getValue() != head1.getValue()) {
+		                   Palindrome = false;
+		                    break;
+		                }
+		                current = current.getNext();
+		                head1 = head1.getNext();
+		                i++;
+		            }
+
+		            return Palindrome;
+		        }
+			}
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
