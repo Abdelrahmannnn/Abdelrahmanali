@@ -158,43 +158,48 @@ public class LinkedListNode {
         
         
         
-        public static LinkedListNode mergeSort(LinkedListNode head) {
+       	public static LinkedListNode mergeSort(LinkedListNode head) {
 				  if (head == null||head.getNext()==null) {
 				        return head;
 				  }
-				  LinkedListNode middle=middleNode(head);
-				  LinkedListNode secondhalf=middle.getNext();
+				  LinkedListNode middle= middleofthelinkedlist(head);
+				  LinkedListNode secondhalfoflist=middle.getNext();
 				  middle.next=null;
-				  return merge( mergeSort(head),mergeSort(secondhalf));
+				  return merge( mergeSort(head),mergeSort(secondhalfoflist));
 				  
 			}
-			public static LinkedListNode merge (LinkedListNode a , LinkedListNode b) {
-				LinkedListNode temp = new LinkedListNode(a.getValue());
-				LinkedListNode finalist=temp;
-				while(a!=null&&b!=null) {
-					if(a.getValue()<b.getValue()) {
-						temp.next=a;
-						a=a.getNext();
+			public static LinkedListNode merge (LinkedListNode x , LinkedListNode y) {
+				LinkedListNode temp = new LinkedListNode(x.getValue());
+				LinkedListNode pointer=temp;
+				while(x!=null&&y!=null) {
+					if(x.getValue()<y.getValue()) {
+						temp.next=x;
+						x=x.getNext();
 					}else {
-						temp.next=b;
-						b=b.getNext();
+						temp.next=y;
+						y=y.getNext();
 					}
 					temp=temp.getNext();
 				}
-				temp.next=(a==null)?b:a;
-				return finalist.next;
+				if(x==null) {
+					temp.next=y;
+					
+				}else if (y==null) {
+					temp.next=x;
+				}
+				return pointer.next;
 			}
-			public static LinkedListNode middleNode(LinkedListNode head) {
+			public static LinkedListNode  middleofthelinkedlist(LinkedListNode head) {
 				if(head==null) {
 					return head;
 				}
-				LinkedListNode a=head;
-				LinkedListNode b=head.getNext();
-				while(b!=null&&b.getNext()!=null) {
-					a=a.getNext();
-					b=b.getNext().getNext();
+				LinkedListNode t=head;
+				LinkedListNode z=head.getNext();
+				while(z!=null&&z.getNext()!=null) {
+					t=t.getNext();
+					z=z.getNext().getNext();
 				}
-				return a;
+				return t;
 			}
       
       
