@@ -21,12 +21,18 @@ public class LinkedListNode {
 
 
 
+   public class MySpecialLinkedListUtils {
 
-
-public static double[] summary(LinkedListNode head  ) {
+        public static double[] summary(LinkedListNode head  ) {
 				int i=0;
 				LinkedListNode w = head ;
+				double []arr=new double [5];
 				double sum=0, average=0,median, max , min ;
+				  if (head == null) {
+					  arr[0]=0;arr[1]=0;arr[2]=0;arr[3]=0;arr[4]=0;
+				        return arr;
+				  }
+				  else {
 				max=head.getValue();
 				min=head.getValue();
 				while(w!=null) {
@@ -58,11 +64,10 @@ public static double[] summary(LinkedListNode head  ) {
 					}else {
 						median=(median1+median2)/2;
 					}
-					double []arr=new double [5];
 					arr[0]=sum;arr[1]=average;arr[2]=median;arr[3]=max;arr[4]=min;
 					return arr;
 									
-				
+				  }
 			}
       
       
@@ -85,6 +90,27 @@ public static double[] summary(LinkedListNode head  ) {
 				
 				return head;
 				
+			}
+			
+			
+			
+			
+			
+			
+	 public static LinkedListNode evenIndexedElements(LinkedListNode head) {
+		LinkedListNode current = head;
+		LinkedListNode temp = head;
+		int i=0;
+		            while(current!=null) {
+					i++;
+					current=current.getNext();
+					if(i%2==0){
+						temp.next=current;
+						temp=temp.getNext();
+					}
+					
+				}
+				return head;
 			}
       
       
@@ -211,24 +237,7 @@ public static double[] summary(LinkedListNode head  ) {
 			}
       
       
-      
-      
-      
-       public static LinkedListNode evenIndexedElements(LinkedListNode head) {
-				LinkedListNode current = head;
-				LinkedListNode temp = head;
-				int i=0;
-				while(current!=null) {
-					i++;
-					current=current.getNext();
-					if(i%2==0){
-						temp.next=current;
-						temp=temp.getNext();
-					}
-					
-				}
-				return head;
-			}
+    
       
       
       
@@ -278,7 +287,9 @@ public static double[] summary(LinkedListNode head  ) {
 
 		            return Palindrome;
 		        }
-			}
+			
+			
+	 }
       
       
       
