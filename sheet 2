@@ -214,26 +214,20 @@ public static double[] summary(LinkedListNode head  ) {
       
       
       
-        public static LinkedListNode evenIndexedElements(LinkedListNode head) {
+       public static LinkedListNode evenIndexedElements(LinkedListNode head) {
 				LinkedListNode current = head;
-				LinkedListNode temp = new LinkedListNode (head.getValue());
-				LinkedListNode pointer=temp;
-				LinkedListNode temp2;
-				
+				LinkedListNode temp = head;
 				int i=0;
 				while(current!=null) {
 					i++;
 					current=current.getNext();
-					temp2=current;
 					if(i%2==0){
-						
-						temp.next=temp2;
+						temp.next=current;
 						temp=temp.getNext();
 					}
 					
 				}
-				temp.next=null;
-				return pointer;
+				return head;
 			}
       
       
