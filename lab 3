@@ -1,0 +1,240 @@
+package eg.edu.alexu.csd.datastructure.iceHockey.cs41;
+
+public interface IPlayersFinder {
+		
+	
+	public  java.awt.Point[] findPlayers(String[] photo, int team, int threshold);
+	  
+	
+
+}
+
+
+
+
+
+
+
+public  class implement implements IPlayersFinder{
+	
+	  public  java.awt.Point[] findPlayers(String[] photo, int team, int threshold) {
+		  if(photo!=null) {
+	        int area =0;
+	        int numberofelements=0;
+	        String x = Integer.toString(team);
+	        int z=0;
+	        int m=0;
+	        boolean [][]mark=new boolean [photo.length][photo[0].length()];
+	        java.awt.Point[]coordinates = new java.awt.Point[50];
+	        int indexes[]=new int[] {0,0,0,0};
+	        for(int s=0;s<50;s++) {
+	        	coordinates[s]=new java.awt.Point();
+	        }
+	        for (int i = 0; i < photo.length; i++) {
+	            for (int j = 0; j < photo[i].length(); j++) {
+	            	if(photo[i].charAt(j)==x.charAt(0)&&mark[i][j]==false) {
+	            		indexes[0]=i;indexes[1]=j;indexes[2]=i;indexes[3]=j;
+	            		mark[i][j]=true;
+	            		numberofelements=1;
+	            		numberofelements+=check(photo,x,i,j+1,indexes,mark)+check(photo,x,i,j-1,indexes,mark)+check(photo,x,i+1,j,indexes,mark)+check(photo,x,i-1,j,indexes,mark);
+	            	}
+	                area=numberofelements*4;
+	                if (area >= threshold) {
+	                  setpoints(indexes,coordinates,m);
+	                   m++;
+	                   numberofelements=0;
+	                }else {
+	                	mark[i][j]=false;
+	                }
+	           
+	            }
+	        }
+	        java.awt.Point[] p = new java.awt.Point[m];
+	        for(int n=0;n<m;n++) {
+	        	p[n]=new java.awt.Point();
+	        }
+	        int k=0;
+	        for(k=0;k<m;k++) {
+	        	p[k].x=coordinates[k].x;        	
+	        	p[k].y=coordinates[k].y;
+	        }
+	        arrange(p);
+	        
+	        return p;
+	        
+		  }
+		  return null;
+	        
+	    }
+	  
+	   public static int check(String[] photo,String x,int i ,int j ,int[]indexes,boolean [][] w ) {
+		  if(i<0||j<0||j>=photo[0].length()||i>=photo.length) {
+			  return 0;
+		  }else {
+			  if(photo[i].charAt(j)!=x.charAt(0)||w[i][j]==true) {
+				  return 0;
+			  }else {
+				  if(i>indexes[2]) {
+					  indexes[2]=i;    // index 0,1 for the start of the box  ,,, index 2,3 for the end of the box   0,2 for y   1,3 for x
+				  } 
+				  if(i<indexes[0]) {
+					  indexes[0]=i;
+				  }
+				  if(j<indexes[1]) {
+					  indexes[1]=j;
+				  }
+				  if(j>indexes[3]) {
+					  indexes[3]=j;
+				  }
+				  
+				  w[i][j]=true;
+				  return 1+check(photo,x,i,j+1,indexes,w)+check(photo,x,i,j-1,indexes,w)+check(photo,x,i+1,j,indexes,w)+check(photo,x,i-1,j,indexes,w);
+			  }
+		  }
+	  }
+	   
+	public void setpoints(int []arr,java.awt.Point [] coordinates,int index) {
+		int z=arr[1]*2;
+        int t=arr[3]-arr[1];
+        t/=2;
+        t*=2;
+        z+=t;
+        int q=arr[3]-arr[1];
+        if((q%2)==1){
+            z++;
+        }
+        int r=arr[0]*2;
+        t=arr[2]-arr[0];
+        t/=2;
+        t=t*2;
+        r=r+t;
+        int f=arr[2]-arr[0];
+        if((f)%2==1){
+            r++;
+        }
+        coordinates[index].x=z+1;
+        coordinates[index].y=r+1;
+        
+	}
+
+	public void arrange(java.awt.Point [] p){
+		
+	        for (int i=0;i<p.length;i++){
+	            for(int j=0;j<p.length-i-1;j++){
+	                if(p[j].x>p[j+1].x){
+	                    java.awt.Point temp=p[j];
+	                    p[j]=p[j+1];
+	                    p[j+1]=temp;
+	                }
+	            }
+	        }
+	        for (int i=0;i<p.length;i++){
+	            for(int j=0;j<p.length-i-1;j++) {
+
+	                if(p[j].x==p[j+1].x&&p[j].y>p[j+1].y){
+	                    java.awt.Point temp=p[j];
+	                    p[j]=p[j+1];
+	                    p[j+1]=temp;
+	                }
+	            }
+
+	        }
+		
+		
+	}
+    
+
+
+}
+
+
+
+
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+import org.junit.jupiter.api.Test;
+
+class implementTest {
+
+	@Test
+	public void implement() {
+		implement a =new implement();
+		implement b =new implement();
+		implement c =new implement();
+		implement d =new implement();
+		
+		
+		String p1[]=new String[]{
+				"33JUBU33",
+				"3U3O4433",
+				"O33P44NB",
+				"PO3NSDP3",
+				"VNDSD333",
+				"OINFD33X"
+				};
+		String p2[]=new String[]{
+				"44444H44S4",
+				"K444K4L444",
+				"4LJ44T44XH",
+				"444O4VIF44",
+				"44C4D4U444",
+				"4V4Y4KB4M4",
+				"G4W4HP4O4W",
+				"4444ZDQ4S4",
+				"4BR4Y4A444",
+				"4G4V4T4444"
+				};
+		
+		String p3[]=new String[]{
+				"8D88888J8L8E888",
+				"88NKMG8N8E8JI88",
+				"888NS8EU88HN8EO",
+				"LUQ888A8TH8OIH8",
+				"888QJ88R8SG88TY",
+				"88ZQV88B88OUZ8O",
+				"FQ88WF8Q8GG88B8",
+				"8S888HGSB8FT8S8",
+				"8MX88D88888T8K8",
+				"8S8A88MGVDG8XK8",
+				"M88S8B8I8M88J8N",
+				"8W88X88ZT8KA8I8",
+				"88SQGB8I8J88W88",
+				"U88H8NI8CZB88B8",
+				"8PK8H8T8888TQR8"
+				};
+		
+		String p4[]=new String[]{
+				"11111",
+				"1AAA1",
+				"1A1A1",
+				"1AAA1",
+				"11111"
+				};
+		
+		 //My code answers are 
+		
+		java.awt.Point [] x =a.findPlayers(p1, 3, 16);
+		java.awt.Point [] y =b.findPlayers(p2, 4, 16);
+		java.awt.Point [] g =c.findPlayers(p3, 8, 9);
+		java.awt.Point [] k =d.findPlayers(p4, 1, 3);
+		
+		// right answers are 
+		
+		java.awt.Point [] r1 = { new java.awt.Point(4,5),new java.awt.Point (13,9),new java.awt.Point (14,2)};
+		java.awt.Point [] r2 = { new java.awt.Point(3,8),new java.awt.Point (4,16),new java.awt.Point (5,4),new java.awt.Point(16,3),new java.awt.Point(16,17),new java.awt.Point(17,9)};
+		java.awt.Point [] r3= {	new java.awt.Point(1,17),new java.awt.Point(3,3),new java.awt.Point(3,10),new java.awt.Point(3,25),new java.awt.Point(5,21),new java.awt.Point(8,17),new java.awt.Point(9,2),new java.awt.Point(10,9),
+				new java.awt.Point(12,23),new java.awt.Point(17,16),new java.awt.Point(18,3),new java.awt.Point(18,11),new java.awt.Point(18,28),new java.awt.Point(22,20),new java.awt.Point(23,26),new java.awt.Point(24,15),new java.awt.Point(27,2),
+				new java.awt.Point(28,26),new java.awt.Point(29,16)};
+		java.awt.Point [] r4= {new java.awt.Point(5,5),new java.awt.Point(5,5)};
+		
+		assertArrayEquals(r1,x);
+		assertArrayEquals(r2,y);
+		assertArrayEquals(r3,g);
+		assertArrayEquals(r4,k);
+		
+		
+	}
+
+}
