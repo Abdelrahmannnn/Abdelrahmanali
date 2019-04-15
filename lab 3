@@ -95,19 +95,23 @@ public  class implement implements IPlayersFinder{
 	   
 	public void setpoints(int []arr,java.awt.Point [] coordinates,int index) {
 		int z=arr[1]*2;
+		int r=arr[0]*2;
         int t=arr[3]-arr[1];
+        if(t%2!=0) {
         t=t/2;
-        t=t*2;              // this because even and odd
+        t=t*2;
+        }   // to handle the case of even and odd
         z+=t;
         int q=arr[3]-arr[1];
         if((q%2)==1){
             z++;
         }
-        int r=arr[0]*2;
         t=arr[2]-arr[0];
-        t/=2;
-        t=t*2;
-        r=r+t;
+        if(t%2!=0) {
+            t=t/2;
+            t=t*2;
+            }
+        r+=t;
         int f=arr[2]-arr[0];
         if(f%2==1){
             r++;
@@ -142,6 +146,8 @@ public  class implement implements IPlayersFinder{
 
 
 }
+
+
 
 
 
